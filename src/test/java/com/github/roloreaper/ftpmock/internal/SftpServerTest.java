@@ -33,6 +33,6 @@ public class SftpServerTest {
     @Test
     public void testStart() throws InterruptedException {
         sftpServer.start(8081,file);
-        Thread.sleep(1000000);
+        Thread.sleep(1000);
     }
 }
