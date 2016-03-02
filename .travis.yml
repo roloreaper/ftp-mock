@@ -1,16 +1,11 @@
 language: java
 os:
   - linux
-  - osx
-  
-matrix:
-  allow_failures:
-    - os: osx
 
 jdk:
   - oraclejdk8
 install: true
 
 after_success:
-  - mvn clean test jacoco:report coveralls:report
+  - bash <(curl -s https://codecov.io/bash)
 
