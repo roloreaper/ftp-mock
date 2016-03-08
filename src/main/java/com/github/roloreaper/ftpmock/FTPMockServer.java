@@ -24,6 +24,11 @@ public class FTPMockServer implements MockServer {
         started=true;
     }
 
+    @Override
+    public void stop() {
+        sftpServer.stop();
+    }
+
     public boolean isStarted() {
         return started;
     }

@@ -5,7 +5,9 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.File;
 
@@ -56,9 +58,15 @@ public class SFTPServerImplTest {
         Thread.sleep(100);
     }
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Test
     public void testStartIfAlreadyStarted() {
+
         sftpServerImpl.start(8081,file,fileServer);
+        expectedException.expect(DuplicateServerError.class);
+        expectedException.expectMessage("Server already Running on this port or somthing else is Running on port : 8081");
         sftpServerImpl.start(8081,file,fileServer);
     }
 }

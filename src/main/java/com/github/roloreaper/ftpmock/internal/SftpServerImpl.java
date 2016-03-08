@@ -2,17 +2,12 @@ package com.github.roloreaper.ftpmock.internal;
 
 import com.github.roloreaper.ftpmock.FileServer;
 import org.apache.log4j.Logger;
-import org.apache.sshd.common.scp.ScpTransferEventListener;
-import org.apache.sshd.server.Command;
 import org.apache.sshd.server.SshServer;
 import org.apache.sshd.server.command.ScpCommandFactory;
 import org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.attribute.PosixFilePermission;
-import java.util.Set;
 
 /**
  * Created by
@@ -38,6 +33,7 @@ public class SftpServerImpl implements SftpServer {
             sshd.start();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
+            throw new DuplicateServerError(port,e);
         }
     }
 

@@ -15,4 +15,6 @@ public interface MockServer {
     void addValidUser(String username, String password);
 
     void assertIsSatisfied();
+
+    void stop();
 }

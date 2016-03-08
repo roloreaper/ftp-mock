@@ -52,11 +52,13 @@ public class FTPMockServerTest {
     @Test
     public void testAddInValidUser() throws Exception {
         ftpMockServer.addInValidUser("test","notCase");
+        ftpMockServer.start(8091);
     }
 
     @After
     public void tearDown() throws Exception {
         mockery.assertIsSatisfied();
         ftpMockServer.assertIsSatisfied();
+        ftpMockServer.stop();
     }
 }
