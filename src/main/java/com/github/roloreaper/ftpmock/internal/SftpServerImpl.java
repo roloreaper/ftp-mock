@@ -22,23 +22,6 @@ import java.util.Set;
 public class SftpServerImpl implements SftpServer {
     private static final Logger logger = Logger.getLogger(SftpServerImpl.class);
     private SshServer sshd;
-    private ScpTransferEventListener scpTransferEventListener = new ScpTransferEventListener() {
-        public void startFileEvent(FileOperation op, Path file, long length, Set<PosixFilePermission> perms) {
-            System.out.println(file);
-        }
-
-        public void endFileEvent(FileOperation op, Path file, long length, Set<PosixFilePermission> perms, Throwable thrown) {
-            System.out.println(file);
-        }
-
-        public void startFolderEvent(FileOperation op, Path file, Set<PosixFilePermission> perms) {
-            System.out.println(file);
-        }
-
-        public void endFolderEvent(FileOperation op, Path file, Set<PosixFilePermission> perms, Throwable thrown) {
-            System.out.println(file);
-        }
-    };
 
     public void start(int port, File keystorePath, FileServer fileServer) {
 
@@ -48,7 +31,7 @@ public class SftpServerImpl implements SftpServer {
         sshd.setPort(Integer.valueOf(port));
         sshd.setKeyPairProvider(new SimpleGeneratorHostKeyProvider(keystorePath));
         sshd.setPasswordAuthenticator(new MockedPasswordAuthenticator(fileServer));
-        sshd.setCommandFactory(new ScpCommandFactory.Builder().addEventListener(this.scpTransferEventListener).build());
+        sshd.setCommandFactory(new ScpCommandFactory.Builder().build());
 
 
         try {

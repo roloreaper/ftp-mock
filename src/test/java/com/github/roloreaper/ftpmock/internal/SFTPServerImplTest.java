@@ -55,4 +55,10 @@ public class SFTPServerImplTest {
 
         Thread.sleep(100);
     }
+
+    @Test
+    public void testStartIfAlreadyStarted() {
+        sftpServerImpl.start(8081,file,fileServer);
+        sftpServerImpl.start(8081,file,fileServer);
+    }
 }
