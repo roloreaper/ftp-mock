@@ -8,6 +8,7 @@ import org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.BindException;
 
 /**
  * Created by
@@ -31,9 +32,11 @@ public class SftpServerImpl implements SftpServer {
 
         try {
             sshd.start();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw new DuplicateServerError(port,e);
+        } catch (BindException b) {
+            logger.error(b.getMessage(), b);
+            throw new DuplicateServerError(port,b);
+        } catch (IOException e) {
+            logger.error(e);
         }
     }
 

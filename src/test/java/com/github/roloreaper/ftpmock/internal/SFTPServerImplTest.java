@@ -66,7 +66,7 @@ public class SFTPServerImplTest {
 
         sftpServerImpl.start(8081,file,fileServer);
         expectedException.expect(DuplicateServerError.class);
-        expectedException.expectMessage("Server already Running on this port or somthing else is Running on port : 8081");
+        expectedException.expectMessage("Server already Running on this port or something else is Running on port : 8081");
         sftpServerImpl.start(8081,file,fileServer);
     }
 }

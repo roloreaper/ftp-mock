@@ -7,6 +7,6 @@ package com.github.roloreaper.ftpmock.internal;
  */
 public class DuplicateServerError extends RuntimeException {
     public DuplicateServerError(int port,Throwable throwable) {
-        super("Server already Running on this port or somthing else is Running on port : " +port,throwable);
+        super("Server already Running on this port or something else is Running on port : " +port,throwable);
     }
 }
