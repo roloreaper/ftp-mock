@@ -38,6 +38,7 @@ public class FTPMockServerTest {
         mockery.checking(new Expectations() {
             {
                 one(sftpServer).start(with(port), with(aNull(File.class)), with(aNonNull(FileServer.class)));
+                one(sftpServer).stop();
             }
         });
         ftpMockServer.start(port);
@@ -46,19 +47,38 @@ public class FTPMockServerTest {
 
     @Test
     public void testAddValidUser() throws Exception {
+
         ftpMockServer.addValidUser("Test", "case");
+        mockery.checking(new Expectations() {
+            {
+                one(sftpServer).start(with(8091), with(aNull(File.class)), with(aNonNull(FileServer.class)));
+                one(sftpServer).stop();
+
+            }
+        });
+        ftpMockServer.start(8091);
     }
 
     @Test
     public void testAddInValidUser() throws Exception {
-        ftpMockServer.addInValidUser("test","notCase");
-        ftpMockServer.start(8091);
-    }
+        ftpMockServer.addInValidUser("test", "notCase");
+        mockery.checking(new Expectations() {
+            {
+                one(sftpServer).start(with(8091), with(aNull(File.class)), with(aNonNull(FileServer.class)));
+                one(sftpServer).stop();
 
-    @After
+            }
+        });
+
+        ftpMockServer.start(8091);
+
+        }
+
+        @After
     public void tearDown() throws Exception {
-        mockery.assertIsSatisfied();
-        ftpMockServer.assertIsSatisfied();
+
         ftpMockServer.stop();
-    }
+        //ftpMockServer.assertIsSatisfied();
+        mockery.assertIsSatisfied();
+        }
 }
