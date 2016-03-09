@@ -1,5 +1,10 @@
 package com.github.roloreaper.ftpmock;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by
  * User :roloreaper
@@ -7,7 +12,12 @@ package com.github.roloreaper.ftpmock;
  */
 public class ServerBuilder {
 
+    private Map<Integer,FTPMockServer> servers;
     private static ServerBuilder instance;
+
+    public ServerBuilder() {
+        servers=new HashMap<>();
+    }
 
     public static ServerBuilder getInstance() {
         if (instance==null) {
@@ -17,6 +27,17 @@ public class ServerBuilder {
     }
 
     public FTPMockServer build(int port) {
-        return null;
+        FTPMockServer mockServer =getServer(port);
+        mockServer.start(port);
+        return mockServer;
+    }
+
+    private FTPMockServer getServer(int port) {
+        FTPMockServer mockServer = servers.get(port);
+        if (mockServer==null) {
+            mockServer = new FTPMockServer();
+            servers.put(port,mockServer);
+        }
+        return servers.get(port);
     }
 }
