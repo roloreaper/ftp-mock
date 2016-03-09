@@ -40,4 +40,11 @@ public class ServerBuilder {
         }
         return servers.get(port);
     }
+
+    public void stopAll() {
+        for (FTPMockServer mockServer : servers.values()) {
+            mockServer.stop();
+        }
+
+    }
 }

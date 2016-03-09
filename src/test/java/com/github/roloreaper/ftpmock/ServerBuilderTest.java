@@ -22,7 +22,7 @@ public class ServerBuilderTest {
 
     @After
     public void tearDown() throws Exception {
-
+        ServerBuilder.getInstance().stopAll();
     }
 
     @Test
