@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
@@ -24,7 +25,7 @@ public class ServerBuilderTest {
     }
 
     @Test
-    public void testGetInstance() throws Exception {
-
+    public void testGetInstanceIsSingleTon() throws Exception {
+        assertThat(ServerBuilder.getInstance(),is(ServerBuilder.getInstance()));
     }
 }

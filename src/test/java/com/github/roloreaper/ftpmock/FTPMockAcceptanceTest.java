@@ -1,5 +1,7 @@
 package com.github.roloreaper.ftpmock;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -16,5 +18,15 @@ public class FTPMockAcceptanceTest {
         MockServer mockServer= new FTPMockServer();
         mockServer.start(3334);
         assertThat(mockServer.isStarted(),is(true));
+    }
+
+    @Before
+    public void setUp() throws Exception {
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
     }
 }
